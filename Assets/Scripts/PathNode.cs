@@ -38,4 +38,9 @@ public class PathNode
     {
         return _y;
     }
+
+    public void SetIsWalkable(bool isWalkable)
+    {
+        IsWalkable = isWalkable;
+    }
 }

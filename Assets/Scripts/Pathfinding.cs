@@ -105,6 +105,11 @@ public class Pathfinding : MonoBehaviour
         }
     }
 
+    public Grid<PathNode> GetGrid()
+    {
+        return _grid;
+    }
+
     private List<PathNode> GetNeighbourList(PathNode currentNode)
     {
         List<PathNode> neighbourList = new List<PathNode>();
