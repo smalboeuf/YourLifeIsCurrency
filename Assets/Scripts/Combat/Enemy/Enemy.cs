@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour, IEnemy, IDie
 {
+    private Health _health;
+
     [SerializeField] private GameObject _target;
     List<Vector3> _pathVectorList = new List<Vector3>();
     private int _currentPathIndex = 0;
@@ -14,6 +16,7 @@ public class Enemy : MonoBehaviour, IEnemy, IDie
     // Start is called before the first frame update
     void Start()
     {
+        _health = GetComponent<Health>();
         _target = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -29,10 +32,28 @@ public class Enemy : MonoBehaviour, IEnemy, IDie
     public void Attack()
     {
         SetTargetPosition();
+        TargetPlayerMovement();
+    }
 
-        // Movement
+    private void SetTargetPosition()
+    {
+        // Pathfinding
+        _currentPathIndex = 0;
+        _pathVectorList = Pathfinding.Instance.FindPath(transform.position, _target.transform.position);
+
+        if (_pathVectorList != null && _pathVectorList.Count > 0)
+        {
+            _pathVectorList.RemoveAt(0);
+        }
+    }
+
+    private void TargetPlayerMovement()
+    {
         if (_pathVectorList != null)
         {
+            if (_currentPathIndex > _pathVectorList.Count - 1)
+                return;
+
             Vector3 targetPosition = _pathVectorList[_currentPathIndex];
 
             if (Vector2.Distance(transform.position, targetPosition) > 0.5f)
@@ -48,18 +69,6 @@ public class Enemy : MonoBehaviour, IEnemy, IDie
                     StopMoving();
                 }
             }
-        }
-    }
-
-    private void SetTargetPosition()
-    {
-        // Pathfinding
-        _currentPathIndex = 0;
-        _pathVectorList = Pathfinding.Instance.FindPath(transform.position, _target.transform.position);
-
-        if (_pathVectorList != null && _pathVectorList.Count > 0)
-        {
-            _pathVectorList.RemoveAt(0);
         }
     }
 

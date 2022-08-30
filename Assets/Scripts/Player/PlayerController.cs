@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IDie
 {
+    public int ShootHealthCost = 2;
+    public int ShootEnemyHealAmount = 3;
+
     private PlayerMovement _playerMovement;
     private PlayerInputs _playerInputs;
     private ProjectileShooter _projectileShooter;
@@ -44,7 +47,13 @@ public class PlayerController : MonoBehaviour, IDie
 
     public void OnShoot()
     {
-        _health.TakeDamage(1);
+        _health.TakeDamage(ShootHealthCost);
+        _playerHealthBarUi.UpdateUI();
+    }
+
+    public void OnHitEnemy()
+    {
+        _health.Heal(ShootEnemyHealAmount);
         _playerHealthBarUi.UpdateUI();
     }
 

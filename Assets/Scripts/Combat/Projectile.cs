@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Projectile : MonoBehaviour
 {
@@ -9,10 +10,18 @@ public class Projectile : MonoBehaviour
     private Vector3 _shootingDirection;
     private float _speed;
 
+    public delegate void OnHitEnemy();
+    private OnHitEnemy OnHitEnemyEvents = delegate { };
+
     public void SetProjectile(Vector3 shootingDirection, float speed)
     {
         _shootingDirection = shootingDirection;
         _speed = speed;
+    }
+
+    public void SetOnHitEnemyEvent(OnHitEnemy onHitEnemy)
+    {
+        OnHitEnemyEvents += onHitEnemy;
     }
 
     private void Start()
@@ -28,14 +37,31 @@ public class Projectile : MonoBehaviour
     private IEnumerator DestroyAfterTime()
     {
         yield return new WaitForSeconds(_timeBeforeDestroyed);
-        gameObject.SetActive(false);
+        DisableProjectile();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.tag == "Enemy")
+        {
+            OnHitEnemyEvents.Invoke();
+            DisableProjectile();
+            collision.GetComponent<IDie>().Die();
+        }
+
         if (collision.tag == "Projectile Bounds")
         {
-            gameObject.SetActive(false);
+            DisableProjectile();
         }
+    }
+
+    private void DisableProjectile()
+    {
+        if (OnHitEnemyEvents != null)
+        {
+            OnHitEnemyEvents -= GameManager.PlayerController.OnHitEnemy;
+        }
+
+        gameObject.SetActive(false);
     }
 }

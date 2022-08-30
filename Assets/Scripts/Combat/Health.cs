@@ -23,7 +23,7 @@ public class Health : MonoBehaviour
 
         if (CurrentHealth <= 0)
         {
-            GetComponent<IDie>().Die();
+            // GetComponent<IDie>().Die();
         }
     }
 }

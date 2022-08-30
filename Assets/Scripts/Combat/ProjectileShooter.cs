@@ -58,11 +58,17 @@ public class ProjectileShooter : MonoBehaviour
         _projectileShootCounter = TimeBetweenProjectiles;
     }
 
-    public static void ShootProjectile(Vector2 direction, float speed, GameObject projectilePrefab, Transform defaultFirePoint)
+    public void ShootProjectile(Vector2 direction, float speed, GameObject projectilePrefab, Transform defaultFirePoint)
     {
         GameObject bullet = ObjectPool.SharedInstance.GetPooledObject();
         if (bullet != null)
         {
+            if (gameObject.tag == "Player")
+            {
+                Projectile projectile = bullet.GetComponent<Projectile>();
+                projectile.SetOnHitEnemyEvent(GameManager.PlayerController.OnHitEnemy);
+            }
+
             bullet.transform.position = defaultFirePoint.position;
             bullet.transform.rotation = defaultFirePoint.rotation;
             bullet.SetActive(true);
@@ -80,6 +86,4 @@ public class ProjectileShooter : MonoBehaviour
         TimeBetweenProjectiles = _baseTimeBetweenProjectiles;
         ShootAction = DefaultShoot;
     }
-
-
 }
