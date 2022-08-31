@@ -59,7 +59,7 @@ public class Projectile : MonoBehaviour
     {
         if (OnHitEnemyEvents != null)
         {
-            OnHitEnemyEvents -= GameManager.PlayerController.OnHitEnemy;
+            OnHitEnemyEvents -= Globals.PlayerController.OnHitEnemy;
         }
 
         gameObject.SetActive(false);

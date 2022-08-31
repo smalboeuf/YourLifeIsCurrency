@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class Globals : MonoBehaviour
 {
+    // Singleton
+
     [SerializeField] private PlayerController _playerController;
     public static PlayerController PlayerController;
-
 
     private void Awake()
     {

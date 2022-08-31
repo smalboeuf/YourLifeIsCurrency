@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour, IEnemy, IDie
 {
+    [SerializeField] private GameObject _prefab;
     private Health _health;
 
+    public int SpawnCost;
+
+    // Pathfinding
     [SerializeField] private GameObject _target;
     List<Vector3> _pathVectorList = new List<Vector3>();
     private int _currentPathIndex = 0;
-
 
     private float _speed = 4f;
 
@@ -33,6 +36,11 @@ public class Enemy : MonoBehaviour, IEnemy, IDie
     {
         SetTargetPosition();
         TargetPlayerMovement();
+    }
+
+    public GameObject GetPrefab()
+    {
+        return _prefab;
     }
 
     private void SetTargetPosition()

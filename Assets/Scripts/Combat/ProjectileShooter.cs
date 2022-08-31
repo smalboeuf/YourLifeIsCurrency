@@ -66,7 +66,7 @@ public class ProjectileShooter : MonoBehaviour
             if (gameObject.tag == "Player")
             {
                 Projectile projectile = bullet.GetComponent<Projectile>();
-                projectile.SetOnHitEnemyEvent(GameManager.PlayerController.OnHitEnemy);
+                projectile.SetOnHitEnemyEvent(Globals.PlayerController.OnHitEnemy);
             }
 
             bullet.transform.position = defaultFirePoint.position;
