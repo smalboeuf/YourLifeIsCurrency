@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public bool CanSpawnEnemies = true;
+    public int RemainingEnemies = 0;
+
     [SerializeField] List<Enemy> _enemies = new List<Enemy>();
     [SerializeField] List<Transform> _spawnLocations = new List<Transform>();
 
-    private int _currentRound;
+    public int CurrentRound;
     private int _waveSpawnCurrency;
     private List<GameObject> _enemiesToSpawn = new List<GameObject>();
 
@@ -16,22 +19,33 @@ public class EnemySpawner : MonoBehaviour
     private float _spawnInterval;
     private float _spawnTimer;
 
-    private bool _canSpawnEnemies = true;
-
     private void Start()
     {
-        CreateWave();
+        CurrentRound = 1;
+        CreateEnemyWave();
+    }
+
+    private void Update()
+    {
+        if (RemainingEnemies <= 0 && CanSpawnEnemies)
+        {
+            NextRound();
+        }
     }
 
     private void FixedUpdate()
     {
         if (_spawnTimer <= 0)
         {
-            int randomSpawnLocationId = Random.Range(0, _spawnLocations.Count);
-            Transform randomSpawnLocation = _spawnLocations[randomSpawnLocationId];
-            Instantiate(_enemiesToSpawn[0], randomSpawnLocation.position, Quaternion.identity);
-            _enemiesToSpawn.RemoveAt(0);
-            _spawnTimer = _spawnInterval;
+            if (_enemiesToSpawn.Count > 0)
+            {
+                int randomSpawnLocationId = Random.Range(0, _spawnLocations.Count);
+                Transform randomSpawnLocation = _spawnLocations[randomSpawnLocationId];
+                Instantiate(_enemiesToSpawn[0], randomSpawnLocation.position, Quaternion.identity);
+                RemainingEnemies++;
+                _enemiesToSpawn.RemoveAt(0);
+                _spawnTimer = _spawnInterval;
+            }
         }
         else
         {
@@ -40,9 +54,29 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    public void CreateWave()
+    public void NextRound()
     {
-        _waveSpawnCurrency = _currentRound * 10;
+        CurrentRound++;
+        if (CurrentRound % 10 == 0)
+        {
+            // Boss Round
+
+        }
+        else if (CurrentRound % 5 == 0)
+        {
+            // Shop Round
+
+        }
+        else
+        {
+            // Normal Round
+            CreateEnemyWave();
+        }
+    }
+
+    public void CreateEnemyWave()
+    {
+        _waveSpawnCurrency = CurrentRound * 10;
         CreateEnemies();
 
         _spawnInterval = _waveDuration / _enemiesToSpawn.Count;
@@ -52,7 +86,7 @@ public class EnemySpawner : MonoBehaviour
     public void CreateEnemies()
     {
         List<GameObject> createdEnemies = new List<GameObject>();
-
+        print(_waveSpawnCurrency);
         while (_waveSpawnCurrency > 0)
         {
             int randomEnemyListId = Random.Range(0, _enemies.Count);
@@ -63,13 +97,23 @@ public class EnemySpawner : MonoBehaviour
                 createdEnemies.Add(_enemies[randomEnemyListId].GetPrefab());
                 _waveSpawnCurrency -= randomEnemySpawnCost;
             }
-            else if (_currentRound <= 0)
+            else if (CurrentRound <= 0)
             {
                 break;
             }
-
-            _enemiesToSpawn.Clear();
-            _enemiesToSpawn = createdEnemies;
         }
+
+        _enemiesToSpawn.Clear();
+        _enemiesToSpawn = createdEnemies;
+    }
+
+    private void CreateShopRound()
+    {
+
+    }
+
+    private void CreateBossRound()
+    {
+
     }
 }

@@ -9,20 +9,12 @@ public class Globals : MonoBehaviour
     [SerializeField] private PlayerController _playerController;
     public static PlayerController PlayerController;
 
+    [SerializeField] private EnemySpawner _enemySpawner;
+    public static EnemySpawner EnemySpawner;
+
     private void Awake()
     {
         PlayerController = _playerController;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        EnemySpawner = _enemySpawner;
     }
 }

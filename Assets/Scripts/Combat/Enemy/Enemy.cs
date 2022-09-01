@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour, IEnemy, IDie
     List<Vector3> _pathVectorList = new List<Vector3>();
     private int _currentPathIndex = 0;
 
-    private float _speed = 4f;
+    [SerializeField] private float _speed = 4f;
 
     // Start is called before the first frame update
     void Start()
@@ -83,6 +83,7 @@ public class Enemy : MonoBehaviour, IEnemy, IDie
     public void Die()
     {
         print("Enemy died");
+        Globals.EnemySpawner.RemainingEnemies--;
         Destroy(gameObject);
     }
 
