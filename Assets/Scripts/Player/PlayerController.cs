@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour, IDie
     private Health _health;
     [SerializeField] private PlayerHealthBarUI _playerHealthBarUi;
 
+    [SerializeField] Shop _shop;
+    public ShopItem InRangeShopItem;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +57,22 @@ public class PlayerController : MonoBehaviour, IDie
     public void OnHitEnemy()
     {
         _health.Heal(ShootEnemyHealAmount);
+        _playerHealthBarUi.UpdateUI();
+    }
+
+    public void OnInteract()
+    {
+        if (InRangeShopItem != null)
+        {
+            InRangeShopItem.GetComponent<IShopItem>().OnPurchase();
+            _shop.OnPurchase();
+            InRangeShopItem = null;
+        }
+    }
+
+    public void IncreaseMaxHealth(int amount)
+    {
+        _health.IncreaseMaxHealth(amount);
         _playerHealthBarUi.UpdateUI();
     }
 

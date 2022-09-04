@@ -17,7 +17,7 @@ PrefabInstance:
       objectReference: {fileID: 6534289234753062016}
     - target: {fileID: 1776624197673474732, guid: 726ce1e9dbb878b438267f95281dfe9c, type: 3}
       propertyPath: SpawnCost
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1776624197673474734, guid: 726ce1e9dbb878b438267f95281dfe9c, type: 3}
       propertyPath: m_RootOrder

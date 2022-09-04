@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerInputs : MonoBehaviour
 {
+    PlayerController _playerController;
 
     private Vector3 _movementInputs;
     private Vector3 _shootInputs;
@@ -27,13 +28,21 @@ public class PlayerInputs : MonoBehaviour
 
     private void Start()
     {
-
+        _playerController = GetComponent<PlayerController>();
     }
 
     void Update()
     {
         PlayerMovementInputs();
         HandleShootInputs();
+    }
+
+    private void HandleInteractInputs()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            _playerController.OnInteract();
+        }
     }
 
     private void PlayerMovementInputs()

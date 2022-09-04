@@ -14,10 +14,11 @@ public class EnemySpawner : MonoBehaviour
     private int _waveSpawnCurrency;
     private List<GameObject> _enemiesToSpawn = new List<GameObject>();
 
-    private float _waveDuration;
+    private float _waveDuration = 20;
     private float _waveTimer;
-    private float _spawnInterval;
+    private float _spawnInterval = 10;
     private float _spawnTimer;
+
 
     private void Start()
     {
@@ -26,14 +27,6 @@ public class EnemySpawner : MonoBehaviour
     }
 
     private void Update()
-    {
-        if (RemainingEnemies <= 0 && CanSpawnEnemies)
-        {
-            NextRound();
-        }
-    }
-
-    private void FixedUpdate()
     {
         if (_spawnTimer <= 0)
         {
@@ -57,20 +50,30 @@ public class EnemySpawner : MonoBehaviour
     public void NextRound()
     {
         CurrentRound++;
+        print("Current Round: " + CurrentRound);
         if (CurrentRound % 10 == 0)
         {
             // Boss Round
-
+            CreateBossRound();
         }
         else if (CurrentRound % 5 == 0)
         {
             // Shop Round
-
+            CreateShopRound();
         }
         else
         {
             // Normal Round
             CreateEnemyWave();
+        }
+    }
+
+    public void EnemyDies()
+    {
+        RemainingEnemies--;
+        if (RemainingEnemies <= 0 && CanSpawnEnemies)
+        {
+            NextRound();
         }
     }
 
@@ -86,7 +89,6 @@ public class EnemySpawner : MonoBehaviour
     public void CreateEnemies()
     {
         List<GameObject> createdEnemies = new List<GameObject>();
-        print(_waveSpawnCurrency);
         while (_waveSpawnCurrency > 0)
         {
             int randomEnemyListId = Random.Range(0, _enemies.Count);
@@ -109,11 +111,11 @@ public class EnemySpawner : MonoBehaviour
 
     private void CreateShopRound()
     {
-
+        print("Shop Round");
     }
 
     private void CreateBossRound()
     {
-
+        print("BossRound");
     }
 }

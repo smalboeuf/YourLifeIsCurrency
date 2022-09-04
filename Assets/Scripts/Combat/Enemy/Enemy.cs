@@ -83,7 +83,7 @@ public class Enemy : MonoBehaviour, IEnemy, IDie
     public void Die()
     {
         print("Enemy died");
-        Globals.EnemySpawner.RemainingEnemies--;
+        Globals.EnemySpawner.EnemyDies();
         Destroy(gameObject);
     }
 

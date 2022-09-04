@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class ShopItem : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Health _playerInRangeHealth;
+    [SerializeField] private int _healthCost = 10;
+
+    public void PayCost()
     {
-        
+        if (_playerInRangeHealth != null)
+        {
+            _playerInRangeHealth.TakeDamage(_healthCost);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        
+        if (other.tag == "Player")
+        {
+            PlayerController playerController = other.GetComponent<PlayerController>();
+            playerController.InRangeShopItem = this;
+        }
     }
 }

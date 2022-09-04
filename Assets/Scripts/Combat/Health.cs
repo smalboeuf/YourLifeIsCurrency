@@ -26,4 +26,10 @@ public class Health : MonoBehaviour
             // GetComponent<IDie>().Die();
         }
     }
+
+    public void IncreaseMaxHealth(int amount)
+    {
+        MaxHealth += amount;
+        CurrentHealth += amount;
+    }
 }
