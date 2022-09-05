@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour, IDie
     private void Shooting()
     {
         Vector3 shootingInputs = _playerInputs.ShootInputs;
+
         // When holding down arrows, shoot in that direction
         if (shootingInputs != Vector3.zero)
         {
@@ -67,6 +68,8 @@ public class PlayerController : MonoBehaviour, IDie
             InRangeShopItem.GetComponent<IShopItem>().OnPurchase();
             _shop.OnPurchase();
             InRangeShopItem = null;
+
+            Globals.EnemySpawner.NextRound();
         }
     }
 

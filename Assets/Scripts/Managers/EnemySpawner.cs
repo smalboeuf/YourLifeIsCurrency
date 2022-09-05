@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public bool CanSpawnEnemies = true;
+    [SerializeField] private Shop _shop;
+    public bool CanSpawnEnemies = false;
     public int RemainingEnemies = 0;
 
+    [SerializeField] GameObject _enemiesParent;
     [SerializeField] List<Enemy> _enemies = new List<Enemy>();
     [SerializeField] List<Transform> _spawnLocations = new List<Transform>();
 
@@ -17,8 +19,7 @@ public class EnemySpawner : MonoBehaviour
     private float _waveDuration = 20;
     private float _waveTimer;
     private float _spawnInterval = 10;
-    private float _spawnTimer;
-
+    private float _spawnTimer = 0;
 
     private void Start()
     {
@@ -28,13 +29,13 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
-        if (_spawnTimer <= 0)
+        if (_spawnTimer <= 0 && CanSpawnEnemies)
         {
             if (_enemiesToSpawn.Count > 0)
             {
                 int randomSpawnLocationId = Random.Range(0, _spawnLocations.Count);
                 Transform randomSpawnLocation = _spawnLocations[randomSpawnLocationId];
-                Instantiate(_enemiesToSpawn[0], randomSpawnLocation.position, Quaternion.identity);
+                Instantiate(_enemiesToSpawn[0], randomSpawnLocation.position, Quaternion.identity, _enemiesParent.transform);
                 RemainingEnemies++;
                 _enemiesToSpawn.RemoveAt(0);
                 _spawnTimer = _spawnInterval;
@@ -49,6 +50,7 @@ public class EnemySpawner : MonoBehaviour
 
     public void NextRound()
     {
+        CanSpawnEnemies = true;
         CurrentRound++;
         print("Current Round: " + CurrentRound);
         if (CurrentRound % 10 == 0)
@@ -79,11 +81,12 @@ public class EnemySpawner : MonoBehaviour
 
     public void CreateEnemyWave()
     {
-        _waveSpawnCurrency = CurrentRound * 10;
+        _waveSpawnCurrency = CurrentRound * 5;
         CreateEnemies();
 
         _spawnInterval = _waveDuration / _enemiesToSpawn.Count;
         _waveTimer = _waveDuration;
+        CanSpawnEnemies = true;
     }
 
     public void CreateEnemies()
@@ -111,7 +114,10 @@ public class EnemySpawner : MonoBehaviour
 
     private void CreateShopRound()
     {
+        CanSpawnEnemies = false;
         print("Shop Round");
+        _shop.gameObject.SetActive(true);
+        _shop.StartShopRound();
     }
 
     private void CreateBossRound()

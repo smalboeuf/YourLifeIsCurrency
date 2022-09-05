@@ -35,6 +35,7 @@ public class PlayerInputs : MonoBehaviour
     {
         PlayerMovementInputs();
         HandleShootInputs();
+        HandleInteractInputs();
     }
 
     private void HandleInteractInputs()
