@@ -122,6 +122,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void CreateBossRound()
     {
+        CanSpawnEnemies = false;
         print("BossRound");
     }
 }
