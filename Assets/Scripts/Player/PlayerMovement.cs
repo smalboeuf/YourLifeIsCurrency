@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         _rb2d = GetComponent<Rigidbody2D>();
-        // _animator = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
     }
 
     public void MoveCharacter(Vector3 direction)
@@ -23,13 +23,13 @@ public class PlayerMovement : MonoBehaviour
             if (direction != Vector3.zero)
             {
                 _rb2d.MovePosition(transform.position + direction.normalized * _speed * Time.deltaTime);
-                // _animator.SetFloat("moveX", direction.x);
-                // _animator.SetFloat("moveY", direction.y);
-                // _animator.SetBool("moving", true);
+                _animator.SetFloat("moveX", direction.x);
+                _animator.SetFloat("moveY", direction.y);
+                _animator.SetBool("isMoving", true);
             }
             else
             {
-                // _animator.SetBool("moving", false);
+                _animator.SetBool("isMoving", false);
             }
         }
     }
