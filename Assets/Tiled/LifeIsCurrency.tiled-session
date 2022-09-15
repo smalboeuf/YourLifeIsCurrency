@@ -9,14 +9,14 @@
     ],
     "fileStates": {
         "Grass.tsx": {
-            "scaleInDock": 1.5
+            "scaleInDock": 4
         },
         "Map.tmx": {
-            "scale": 1,
+            "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 477,
-                "y": 349
+                "x": 552.3333333333333,
+                "y": 189
             }
         },
         "Plants.tsx": {
