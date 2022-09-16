@@ -45,6 +45,9 @@ public class Enemy : MonoBehaviour, IEnemy, IDie
 
     private void SetTargetPosition()
     {
+        if (_target == null)
+            print(_target);
+
         // Pathfinding
         _currentPathIndex = 0;
         _pathVectorList = Pathfinding.Instance.FindPath(transform.position, _target.transform.position);
