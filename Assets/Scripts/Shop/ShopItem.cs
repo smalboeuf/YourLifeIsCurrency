@@ -8,6 +8,8 @@ public class ShopItem : MonoBehaviour
     private Health _playerInRangeHealth;
     [SerializeField] private int _healthCost = 10;
 
+    [SerializeField] public string ShopDescription;
+
     public void Purchase()
     {
         if (_playerInRangeHealth != null)

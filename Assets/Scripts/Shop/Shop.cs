@@ -8,16 +8,28 @@ public class Shop : MonoBehaviour
     public List<GameObject> CurrentDisplayedItems;
     public List<GameObject> _itemPositions;
     public GameObject ItemsParent;
+    public ShopKeeper ShopKeeper;
+
+    [SerializeField] private Transform _shopKeeperEntranceSpawnLocation;
 
     public void StartShopRound()
     {
-        GenerateShopItems();
+        SpawnShopKeeper();
+        // GenerateShopItems();
+    }
+
+    public void SpawnShopKeeper()
+    {
+        ShopKeeper.gameObject.transform.position = _shopKeeperEntranceSpawnLocation.position;
+        ShopKeeper.gameObject.SetActive(true);
+        ShopKeeper.Spawn();
     }
 
     public void OnPurchase()
     {
         ClearExistingDisplayedItems();
         gameObject.SetActive(false);
+        // TODO: Set new speech line for merchant after purchase
     }
 
     private void GenerateShopItems()
