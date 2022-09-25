@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour, IDie
 {
     public int ShootHealthCost = 2;
     public int ShootEnemyHealAmount = 3;
+    public int BasicAttackDamage = 3;
 
     private PlayerMovement _playerMovement;
     private PlayerInputs _playerInputs;
@@ -73,14 +74,30 @@ public class PlayerController : MonoBehaviour, IDie
         }
     }
 
+    public void Die()
+    {
+        print("Player Died");
+    }
+
     public void IncreaseMaxHealth(int amount)
     {
         _health.IncreaseMaxHealth(amount);
         _playerHealthBarUi.UpdateUI();
     }
 
-    public void Die()
+    public void UpdateTimeBetweenProjectiles(float amount)
     {
-        print("Player Died");
+        _projectileShooter.TimeBetweenProjectiles += amount;
+    }
+
+    public void IncreaseBaseDamage(int damageAddition, int healthCostAddition)
+    {
+        BasicAttackDamage += damageAddition;
+        ShootHealthCost += healthCostAddition;
+    }
+
+    public void IncreaseOnHitHealAmount(int amount)
+    {
+        ShootEnemyHealAmount += amount;
     }
 }

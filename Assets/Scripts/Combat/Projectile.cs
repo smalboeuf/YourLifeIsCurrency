@@ -9,14 +9,16 @@ public class Projectile : MonoBehaviour
 
     private Vector3 _shootingDirection;
     private float _speed;
+    private int _damage;
 
     public delegate void OnHitEnemy();
     private OnHitEnemy OnHitEnemyEvents = delegate { };
 
-    public void SetProjectile(Vector3 shootingDirection, float speed)
+    public void SetProjectile(Vector3 shootingDirection, float speed, int damage)
     {
         _shootingDirection = shootingDirection;
         _speed = speed;
+        _damage = damage;
     }
 
     public void SetOnHitEnemyEvent(OnHitEnemy onHitEnemy)
@@ -46,7 +48,8 @@ public class Projectile : MonoBehaviour
         {
             OnHitEnemyEvents.Invoke();
             DisableProjectile();
-            collision.GetComponent<IDie>().Die();
+            collision.GetComponent<Health>().TakeDamage(_damage);
+            // collision.GetComponent<IDie>().Die();
         }
 
         if (collision.tag == "Projectile Bounds")

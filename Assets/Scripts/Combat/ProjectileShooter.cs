@@ -10,6 +10,7 @@ public class ProjectileShooter : MonoBehaviour
     public float ProjectileSpeed;
     public float TimeBetweenProjectiles;
 
+    [SerializeField] private int _basicAttackDamage = 1;
     [SerializeField] private float _baseTimeBetweenProjectiles = 0.25f;
     private float _projectileShootCounter;
 
@@ -72,7 +73,7 @@ public class ProjectileShooter : MonoBehaviour
             bullet.transform.position = defaultFirePoint.position;
             bullet.transform.rotation = defaultFirePoint.rotation;
             bullet.SetActive(true);
-            bullet.GetComponent<Projectile>().SetProjectile(direction, speed);
+            bullet.GetComponent<Projectile>().SetProjectile(direction, speed, _basicAttackDamage);
         }
     }
 
