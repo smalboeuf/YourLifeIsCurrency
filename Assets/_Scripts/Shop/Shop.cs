@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class Shop : MonoBehaviour
@@ -15,7 +16,6 @@ public class Shop : MonoBehaviour
     public void StartShopRound()
     {
         SpawnShopKeeper();
-        // GenerateShopItems();
     }
 
     public void SpawnShopKeeper()
@@ -32,8 +32,9 @@ public class Shop : MonoBehaviour
         // TODO: Set new speech line for merchant after purchase
     }
 
-    private void GenerateShopItems()
+    public void GenerateShopItems()
     {
+        print("Generating");
         ClearExistingDisplayedItems();
 
         foreach (var itemPosition in _itemPositions)

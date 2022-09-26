@@ -489,7 +489,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &291651567
 Transform:
   m_ObjectHideFlags: 0
@@ -10985,7 +10985,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &941057320
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11173,7 +11173,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1050893173}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.1317749, y: 2.5473633, z: -8.439672}
+  m_LocalPosition: {x: 0, y: 2.5473633, z: -8.439672}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11689,10 +11689,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948fb49923b7867468dc123453d7a047, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speechBubbleText: {fileID: 1990700283}
   _shopKeeperEntranceSpawnLocation: {fileID: 594463919}
   _shopLocation: {fileID: 1050893174}
   IsAtDestination: 0
+  _speechBubbleParent: {fileID: 291651566}
+  _speechBubbleText: {fileID: 1990700283}
+  _speechTime: 3
+  EntranceQuotes:
+  - Oh hello young one!
+  ExitQuotes:
+  - Well I guess I will see you around!
+  - Good choice kiddo! I'll see you around!
 --- !u!1 &1686466335
 GameObject:
   m_ObjectHideFlags: 0
@@ -12179,7 +12186,7 @@ MonoBehaviour:
   m_text: Hey there!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 07e7c8c4d000f9a489f96267a765abbf, type: 2}
-  m_sharedMaterial: {fileID: -1977924647975612162, guid: b641d8c8162d5c740852be8ac01f0a34,
+  m_sharedMaterial: {fileID: 8530633540519283192, guid: 07e7c8c4d000f9a489f96267a765abbf,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -12243,7 +12250,7 @@ MonoBehaviour:
   m_margin: {x: -39.06531, y: -53.90417, z: -48.747265, w: -60.436855}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1990700284
@@ -16257,7 +16264,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerController: {fileID: 82524624}
   _enemySpawner: {fileID: 1873691108}
-  _shop: {fileID: 0}
+  _shop: {fileID: 105755805}
 --- !u!1001 &4880576530530524238
 PrefabInstance:
   m_ObjectHideFlags: 0
