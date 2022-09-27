@@ -34,7 +34,6 @@ public class Shop : MonoBehaviour
 
     public void GenerateShopItems()
     {
-        print("Generating");
         ClearExistingDisplayedItems();
 
         foreach (var itemPosition in _itemPositions)

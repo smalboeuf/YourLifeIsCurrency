@@ -6,15 +6,14 @@ public class ShopItem : MonoBehaviour
 {
     public GameObject ItemPrefab;
     private Health _playerInRangeHealth;
-    [SerializeField] private int _healthCost = 10;
-
+    [SerializeField] public int HealthCost = 10;
     [SerializeField] public string Description;
 
     public void Purchase()
     {
         if (_playerInRangeHealth != null)
         {
-            _playerInRangeHealth.TakeDamage(_healthCost);
+            _playerInRangeHealth.TakeDamage(HealthCost);
         }
     }
 
@@ -24,6 +23,7 @@ public class ShopItem : MonoBehaviour
         {
             PlayerController playerController = other.GetComponent<PlayerController>();
             playerController.InRangeShopItem = this;
+            Globals.Shop.ShopKeeper.GenerateItemDescription(this);
         }
     }
 
@@ -31,6 +31,7 @@ public class ShopItem : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            Globals.Shop.ShopKeeper.HideItemDescription();
             PlayerController playerController = other.GetComponent<PlayerController>();
             playerController.InRangeShopItem = null;
         }

@@ -19,9 +19,13 @@ public class ShopKeeper : MonoBehaviour
     // Speech
     [SerializeField] private GameObject _speechBubbleParent;
     [SerializeField] private TextMeshProUGUI _speechBubbleText;
+    [SerializeField] private GameObject _itemDescriptionParent;
+    [SerializeField] private TextMeshProUGUI _itemDescriptionText;
+    [SerializeField] private TextMeshProUGUI _itemCostText;
     [SerializeField] private float _speechTime = 4;
     private float _speechTimer = 0;
     private bool _showingSpeechBubble = false;
+    private bool _showingItemDescription = false;
 
     [SerializeField]
     List<string> EntranceQuotes = new List<string>
@@ -87,17 +91,32 @@ public class ShopKeeper : MonoBehaviour
         }
 
         _speechBubbleParent.SetActive(true);
+        _speechBubbleText.gameObject.SetActive(true);
         _showingSpeechBubble = true;
         _speechTimer = _speechTime;
     }
 
     public void GenerateItemDescription(ShopItem item)
     {
+        _itemCostText.text = item.HealthCost.ToString();
+        _itemDescriptionText.text = item.Description;
+        _speechBubbleParent.SetActive(true);
+        _itemDescriptionParent.SetActive(true);
+        _showingItemDescription = true;
+    }
 
+    public void HideItemDescription()
+    {
+        _speechBubbleParent.SetActive(false);
+        _itemDescriptionParent.SetActive(false);
+        _showingItemDescription = false;
     }
 
     private void SpeechTimer()
     {
+        if (_showingItemDescription)
+            return;
+
         if (_speechTimer > 0 && _showingSpeechBubble)
         {
             _speechTimer -= Time.deltaTime;
@@ -105,8 +124,21 @@ public class ShopKeeper : MonoBehaviour
 
         if (_speechTimer <= 0)
         {
-            _showingSpeechBubble = false;
-            _speechBubbleParent.SetActive(false);
+            DisableSpeechBubble();
         }
+    }
+
+    private void DisableItemDescription()
+    {
+        _speechBubbleParent.SetActive(false);
+        _itemDescriptionParent.SetActive(false);
+        _showingItemDescription = false;
+    }
+
+    private void DisableSpeechBubble()
+    {
+        _speechBubbleParent.SetActive(false);
+        _speechBubbleText.gameObject.SetActive(false);
+        _showingSpeechBubble = false;
     }
 }

@@ -88,5 +88,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemPrefab: {fileID: 5565453513486477713}
-  _healthCost: 10
-  _lifestealIncrease: 0
+  HealthCost: 10
+  Description: Fancy a bit more healing on impact?
+  _lifestealIncrease: 1

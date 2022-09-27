@@ -100,7 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemPrefab: {fileID: 8722590428971056426}
-  _healthCost: 10
+  HealthCost: 10
+  Description: This will surely help you beef up and take more hits.
   _healthIncrease: 10
 --- !u!58 &8722590428971056428
 CircleCollider2D:

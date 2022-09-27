@@ -88,6 +88,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemPrefab: {fileID: 2072253715244208028}
-  _healthCost: 10
+  HealthCost: 10
+  Description: This one will add a bit of kick to your regular attacks.
   _damageAddition: 1
   _healthCostAddition: 1
