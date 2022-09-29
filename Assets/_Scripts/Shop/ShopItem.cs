@@ -31,7 +31,7 @@ public class ShopItem : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Globals.Shop.ShopKeeper.HideItemDescription();
+            Globals.Shop.ShopKeeper.DisableItemDescription();
             PlayerController playerController = other.GetComponent<PlayerController>();
             playerController.InRangeShopItem = null;
         }

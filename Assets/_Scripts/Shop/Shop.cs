@@ -13,6 +13,15 @@ public class Shop : MonoBehaviour
 
     [SerializeField] private Transform _shopKeeperEntranceSpawnLocation;
 
+    private void Update()
+    {
+        if (ShopKeeper.IsReadyToLeave())
+        {
+            print("ready to leave");
+            gameObject.SetActive(false);
+        }
+    }
+
     public void StartShopRound()
     {
         SpawnShopKeeper();
@@ -28,7 +37,8 @@ public class Shop : MonoBehaviour
     public void OnPurchase()
     {
         ClearExistingDisplayedItems();
-        gameObject.SetActive(false);
+        ShopKeeper.Leave();
+        // gameObject.SetActive(false);
         // TODO: Set new speech line for merchant after purchase
     }
 

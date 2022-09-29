@@ -53,7 +53,7 @@ public class ShopKeeper : MonoBehaviour
         {
             transform.position = Vector2.MoveTowards(transform.position, _destination.position, _speed * Time.deltaTime);
 
-            if (Vector2.Distance(transform.position, _destination.position) <= _destinationBuffer && _destination == _shopLocation)
+            if (Vector2.Distance(transform.position, _destination.position) <= _destinationBuffer)
             {
                 IsAtDestination = true;
                 Globals.Shop.GenerateShopItems();
@@ -72,6 +72,8 @@ public class ShopKeeper : MonoBehaviour
 
     public void Leave()
     {
+        DisableSpeechBubble();
+        DisableItemDescription();
         _destination = _shopKeeperEntranceSpawnLocation;
         IsAtDestination = false;
         GenerateQuote(QuoteType.Exit);
@@ -105,11 +107,16 @@ public class ShopKeeper : MonoBehaviour
         _showingItemDescription = true;
     }
 
-    public void HideItemDescription()
+    public void DisableItemDescription()
     {
         _speechBubbleParent.SetActive(false);
         _itemDescriptionParent.SetActive(false);
         _showingItemDescription = false;
+    }
+
+    public bool IsReadyToLeave()
+    {
+        return IsAtDestination && _destination == _shopKeeperEntranceSpawnLocation;
     }
 
     private void SpeechTimer()
@@ -126,13 +133,6 @@ public class ShopKeeper : MonoBehaviour
         {
             DisableSpeechBubble();
         }
-    }
-
-    private void DisableItemDescription()
-    {
-        _speechBubbleParent.SetActive(false);
-        _itemDescriptionParent.SetActive(false);
-        _showingItemDescription = false;
     }
 
     private void DisableSpeechBubble()
