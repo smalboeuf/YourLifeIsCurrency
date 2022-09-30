@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IEnemy, IDie
+public class Enemy : Unit, IEnemy, IDie
 {
     [SerializeField] private GameObject _prefab;
     private Health _health;
+    [SerializeField] int _meleeDamage = 4;
 
     public int SpawnCost;
 
@@ -17,15 +18,17 @@ public class Enemy : MonoBehaviour, IEnemy, IDie
     [SerializeField] private float _speed = 4f;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         _health = GetComponent<Health>();
         _target = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
+        base.Update();
         if (_target != null)
         {
             Attack();
@@ -92,5 +95,16 @@ public class Enemy : MonoBehaviour, IEnemy, IDie
     private void StopMoving()
     {
         _pathVectorList = null;
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.collider.tag == "Player")
+        {
+            GameObject playerGameObject = other.gameObject;
+            print("collider player");
+            playerGameObject.GetComponent<PlayerController>().TakeDamage(_meleeDamage);
+            StartCoroutine(playerGameObject.GetComponent<Unit>().ExecuteKnockback(1, 5, this.transform));
+        }
     }
 }

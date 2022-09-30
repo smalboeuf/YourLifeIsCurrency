@@ -17,7 +17,6 @@ public class Shop : MonoBehaviour
     {
         if (ShopKeeper.IsReadyToLeave())
         {
-            print("ready to leave");
             gameObject.SetActive(false);
         }
     }

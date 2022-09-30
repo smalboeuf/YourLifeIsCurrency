@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, IDie
+public class PlayerController : Unit, IDie
 {
     public int ShootHealthCost = 2;
     public int ShootEnemyHealAmount = 3;
@@ -20,8 +20,9 @@ public class PlayerController : MonoBehaviour, IDie
     public ShopItem InRangeShopItem;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         _playerMovement = GetComponent<PlayerMovement>();
         _playerInputs = GetComponent<PlayerInputs>();
         _projectileShooter = GetComponent<ProjectileShooter>();
@@ -29,8 +30,9 @@ public class PlayerController : MonoBehaviour, IDie
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
+        base.Update();
         Shooting();
     }
 
@@ -52,13 +54,18 @@ public class PlayerController : MonoBehaviour, IDie
 
     public void OnShoot()
     {
-        _health.TakeDamage(ShootHealthCost);
-        _playerHealthBarUi.UpdateUI();
+        TakeDamage(ShootHealthCost);
     }
 
     public void OnHitEnemy()
     {
         _health.Heal(ShootEnemyHealAmount);
+        _playerHealthBarUi.UpdateUI();
+    }
+
+    public void TakeDamage(int damage)
+    {
+        _health.TakeDamage(ShootHealthCost);
         _playerHealthBarUi.UpdateUI();
     }
 

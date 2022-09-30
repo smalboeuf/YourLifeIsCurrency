@@ -49,7 +49,6 @@ public class Projectile : MonoBehaviour
             OnHitEnemyEvents.Invoke();
             DisableProjectile();
             collision.GetComponent<Health>().TakeDamage(_damage);
-            // collision.GetComponent<IDie>().Die();
         }
 
         if (collision.tag == "Projectile Bounds")
