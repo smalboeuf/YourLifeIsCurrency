@@ -53,6 +53,9 @@ public class Enemy : Unit, IEnemy, IDie
 
         // Pathfinding
         _currentPathIndex = 0;
+        if (_target == null)
+            return;
+
         _pathVectorList = Pathfinding.Instance.FindPath(transform.position, _target.transform.position);
 
         if (_pathVectorList != null && _pathVectorList.Count > 0)
@@ -102,9 +105,8 @@ public class Enemy : Unit, IEnemy, IDie
         if (other.collider.tag == "Player")
         {
             GameObject playerGameObject = other.gameObject;
-            print("collider player");
             playerGameObject.GetComponent<PlayerController>().TakeDamage(_meleeDamage);
-            StartCoroutine(playerGameObject.GetComponent<Unit>().ExecuteKnockback(1, 5, this.transform));
+            StartCoroutine(playerGameObject.GetComponent<Unit>().ExecuteKnockback(0.25f, 0.1f, this.transform));
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
-    public Rigidbody2D _rb2d;
+    public Rigidbody2D Rb2d;
     private SpriteRenderer _spriteRenderer;
     [SerializeField] Material _defaultSpriteMaterial;
     [SerializeField] Material _flashSpriteMaterial;
@@ -13,9 +13,11 @@ public class Unit : MonoBehaviour
     private float _flashTimer = 0;
     private bool _isFlashing = false;
 
+    public bool CanMove = true;
+
     protected virtual void Start()
     {
-        _rb2d = GetComponent<Rigidbody2D>();
+        Rb2d = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -35,14 +37,9 @@ public class Unit : MonoBehaviour
     public IEnumerator ExecuteKnockback(float knockbackDuration, float knockbackPower, Transform source)
     {
         OnHitFlash();
-        // float timer = 0;
-        // // while (knockbackDuration > timer)
-        // // {
-        // timer -= Time.deltaTime;
-        // Vector2 direction = (source.transform.position - target.transform.position).normalized;
-        // target.GetComponent<Rigidbody2D>().AddForce(-direction * knockbackPower);
-        // // }
-
+        Vector3 direction = (source.transform.position - gameObject.transform.position).normalized;
+        Rb2d.AddForce(-direction * knockbackPower);
+        StartCoroutine(KnockbackTimer(Rb2d, knockbackDuration));
         yield return 0;
     }
 
@@ -51,5 +48,14 @@ public class Unit : MonoBehaviour
         _flashTimer = _onHitFlashLength;
         _spriteRenderer.material = _flashSpriteMaterial;
         _isFlashing = true;
+    }
+
+    private IEnumerator KnockbackTimer(Rigidbody2D rb, float knockbackDuration)
+    {
+        if (rb != null)
+        {
+            yield return new WaitForSeconds(knockbackDuration);
+            rb.velocity = Vector2.zero;
+        }
     }
 }

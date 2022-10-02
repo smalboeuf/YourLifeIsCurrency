@@ -38,7 +38,10 @@ public class PlayerController : Unit, IDie
 
     private void FixedUpdate()
     {
-        _playerMovement.MoveCharacter(_playerInputs.Inputs);
+        if (CanMove)
+        {
+            _playerMovement.MoveCharacter(_playerInputs.Inputs);
+        }
     }
 
     private void Shooting()

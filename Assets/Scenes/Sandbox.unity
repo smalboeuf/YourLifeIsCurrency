@@ -16411,6 +16411,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3525264808608393745, guid: b4290499b4f2faf40b44fdf6923dfdaf,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3525264808608393745, guid: b4290499b4f2faf40b44fdf6923dfdaf,
+        type: 3}
+      propertyPath: m_LinearDrag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3525264808608393745, guid: b4290499b4f2faf40b44fdf6923dfdaf,
+        type: 3}
+      propertyPath: m_AngularDrag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3525264808608393745, guid: b4290499b4f2faf40b44fdf6923dfdaf,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3525264808608393745, guid: b4290499b4f2faf40b44fdf6923dfdaf,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3525264808608393747, guid: b4290499b4f2faf40b44fdf6923dfdaf,
         type: 3}
       propertyPath: _shop
