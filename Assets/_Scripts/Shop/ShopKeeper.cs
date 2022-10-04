@@ -6,7 +6,7 @@ using TMPro;
 
 public class ShopKeeper : MonoBehaviour
 {
-
+    private Animator _animator;
     [SerializeField] private Transform _shopKeeperEntranceSpawnLocation;
     [SerializeField] private Transform _shopLocation;
 
@@ -47,10 +47,16 @@ public class ShopKeeper : MonoBehaviour
         OnPurchase
     }
 
+    private void Awake()
+    {
+        _animator = GetComponent<Animator>();
+    }
+
     private void Update()
     {
-        if (!IsAtDestination)
+        if (!IsAtDestination && _destination != null)
         {
+            print(_destination);
             transform.position = Vector2.MoveTowards(transform.position, _destination.position, _speed * Time.deltaTime);
 
             if (Vector2.Distance(transform.position, _destination.position) <= _destinationBuffer)
@@ -65,6 +71,7 @@ public class ShopKeeper : MonoBehaviour
 
     public void Spawn()
     {
+        _animator.SetFloat("yMove", -1);
         _destination = _shopLocation;
         IsAtDestination = false;
         GenerateQuote(QuoteType.Entrance);
@@ -72,6 +79,7 @@ public class ShopKeeper : MonoBehaviour
 
     public void Leave()
     {
+        _animator.SetFloat("yMove", 1);
         DisableSpeechBubble();
         DisableItemDescription();
         _destination = _shopKeeperEntranceSpawnLocation;

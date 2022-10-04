@@ -91,6 +91,7 @@ public class Enemy : Unit, IEnemy, IDie
 
     public void Die()
     {
+        print("died called");
         Globals.EnemySpawner.EnemyDies();
         Destroy(gameObject);
     }

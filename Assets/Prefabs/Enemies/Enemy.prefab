@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b,
     type: 3}
-  m_Color: {r: 0.9339623, g: 0.6704659, b: 0.39208794, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -138,12 +138,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f77db5b14b54b04fa54a16ded4a1ebd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb2d: {fileID: 0}
+  Rb2d: {fileID: 0}
   _defaultSpriteMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000,
     type: 0}
   _flashSpriteMaterial: {fileID: 2100000, guid: adb7d835355bb104c8d992c089130de8,
     type: 2}
   _onHitFlashLength: 0.2
+  CanMove: 1
   _prefab: {fileID: 0}
   _meleeDamage: 4
   SpawnCost: 0
