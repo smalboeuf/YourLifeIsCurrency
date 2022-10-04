@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class Projectile : MonoBehaviour
 {
+    private Animator _animator;
     [SerializeField] private float _timeBeforeDestroyed = 5;
 
     private Vector3 _shootingDirection;
@@ -13,6 +14,21 @@ public class Projectile : MonoBehaviour
 
     public delegate void OnHitEnemy();
     private OnHitEnemy OnHitEnemyEvents = delegate { };
+
+    private void Awake()
+    {
+        _animator = GetComponent<Animator>();
+    }
+
+    private void OnEnable()
+    {
+        StartCoroutine(DestroyAfterTime());
+    }
+
+    private void Update()
+    {
+        transform.position += _shootingDirection.normalized * _speed * Time.deltaTime;
+    }
 
     public void SetProjectile(Vector3 shootingDirection, float speed, int damage)
     {
@@ -24,16 +40,6 @@ public class Projectile : MonoBehaviour
     public void SetOnHitEnemyEvent(OnHitEnemy onHitEnemy)
     {
         OnHitEnemyEvents += onHitEnemy;
-    }
-
-    private void Start()
-    {
-        StartCoroutine(DestroyAfterTime());
-    }
-
-    private void Update()
-    {
-        transform.position += _shootingDirection.normalized * _speed * Time.deltaTime;
     }
 
     private IEnumerator DestroyAfterTime()

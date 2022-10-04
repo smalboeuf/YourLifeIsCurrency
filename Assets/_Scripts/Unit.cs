@@ -45,6 +45,7 @@ public class Unit : MonoBehaviour
 
     public void OnHitFlash()
     {
+        print("flash");
         _flashTimer = _onHitFlashLength;
         _spriteRenderer.material = _flashSpriteMaterial;
         _isFlashing = true;
