@@ -17,12 +17,16 @@ public class Enemy : Unit, IEnemy, IDie
 
     [SerializeField] private float _speed = 4f;
 
+    [SerializeField] private float _attackRange = 3;
+    private IEnemyAttack _enemyAttack;
+
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
         _health = GetComponent<Health>();
         _target = GameObject.FindGameObjectWithTag("Player");
+        _enemyAttack = GetComponent<IEnemyAttack>();
     }
 
     // Update is called once per frame
@@ -39,6 +43,11 @@ public class Enemy : Unit, IEnemy, IDie
     {
         SetTargetPosition();
         TargetPlayerMovement();
+
+        if (_enemyAttack != null && Vector2.Distance(gameObject.transform.position, _target.gameObject.transform.position) <= _attackRange)
+        {
+            _enemyAttack.EnemyAttack();
+        }
     }
 
     public GameObject GetPrefab()
@@ -109,5 +118,11 @@ public class Enemy : Unit, IEnemy, IDie
             playerGameObject.GetComponent<PlayerController>().TakeDamage(_meleeDamage);
             StartCoroutine(playerGameObject.GetComponent<Unit>().ExecuteKnockback(0.25f, 0.1f, this.transform));
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, _attackRange);
     }
 }
