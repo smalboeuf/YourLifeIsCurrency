@@ -4,12 +4,24 @@ using UnityEngine;
 
 public class Mushroom : Enemy, IEnemyAttack
 {
+    [SerializeField] private GameObject _explosionGameObject;
+
     public void EnemyAttack()
     {
-        // Start Animation
-
         // End of Animation, explode mushroom and destroy object
-        print("Mushroom Attack");
+        GetAnimator().SetTrigger("Explosion");
+        // Destroy(gameObject);
+    }
+
+    public void EnableExplosionRadius()
+    {
+        CanMove = false;
+        _explosionGameObject.SetActive(true);
+        print("Mushroom: " + CanMove);
+    }
+
+    public void DisableAfterExplosion()
+    {
         Destroy(gameObject);
     }
 }

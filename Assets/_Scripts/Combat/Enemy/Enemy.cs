@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy : Unit, IEnemy, IDie
 {
+    private Animator _animator;
     [SerializeField] private GameObject _prefab;
     private Health _health;
     [SerializeField] int _meleeDamage = 4;
@@ -27,22 +28,30 @@ public class Enemy : Unit, IEnemy, IDie
         _health = GetComponent<Health>();
         _target = GameObject.FindGameObjectWithTag("Player");
         _enemyAttack = GetComponent<IEnemyAttack>();
+        _animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     protected override void Update()
     {
         base.Update();
-        if (_target != null)
+        if (_target != null && CanMove)
         {
             Attack();
+        }
+        else
+        {
+            StopMoving();
         }
     }
 
     public void Attack()
     {
-        SetTargetPosition();
-        TargetPlayerMovement();
+        if (CanMove)
+        {
+            SetTargetPosition();
+            TargetPlayerMovement();
+        }
 
         if (_enemyAttack != null && Vector2.Distance(gameObject.transform.position, _target.gameObject.transform.position) <= _attackRange)
         {
@@ -75,14 +84,14 @@ public class Enemy : Unit, IEnemy, IDie
 
     private void TargetPlayerMovement()
     {
-        if (_pathVectorList != null)
+        if (_pathVectorList != null && CanMove)
         {
             if (_currentPathIndex > _pathVectorList.Count - 1)
                 return;
 
             Vector3 targetPosition = _pathVectorList[_currentPathIndex];
 
-            if (Vector2.Distance(transform.position, targetPosition) > 0.5f)
+            if (Vector2.Distance(transform.position, targetPosition) > 0.5f && CanMove)
             {
                 Vector3 moveDir = (targetPosition - transform.position).normalized;
                 transform.position = transform.position + moveDir * _speed * Time.deltaTime;
@@ -103,6 +112,11 @@ public class Enemy : Unit, IEnemy, IDie
         print("died called");
         Globals.EnemySpawner.EnemyDies();
         Destroy(gameObject);
+    }
+
+    public Animator GetAnimator()
+    {
+        return _animator;
     }
 
     private void StopMoving()

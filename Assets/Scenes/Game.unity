@@ -10870,11 +10870,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -2896385695041624287, guid: f77bf6764acea054b97afd0817d5a6bc,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 181fdc64ef745db44828c0bada100265, type: 2}
+    - target: {fileID: 1225977726, guid: f77bf6764acea054b97afd0817d5a6bc, type: 3}
+      propertyPath: _attackRange
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2935996643277434562, guid: f77bf6764acea054b97afd0817d5a6bc,
         type: 3}
       propertyPath: m_RootOrder
@@ -10934,6 +10933,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Mushroom
+      objectReference: {fileID: 0}
+    - target: {fileID: 6367042731927574386, guid: f77bf6764acea054b97afd0817d5a6bc,
+        type: 3}
+      propertyPath: _damage
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f77bf6764acea054b97afd0817d5a6bc, type: 3}
@@ -11443,7 +11447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shop: {fileID: 105755805}
-  CanSpawnEnemies: 1
+  CanSpawnEnemies: 0
   RemainingEnemies: 0
   _enemiesParent: {fileID: 1988461703}
   _enemies:
