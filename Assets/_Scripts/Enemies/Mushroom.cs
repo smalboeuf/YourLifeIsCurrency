@@ -9,13 +9,13 @@ public class Mushroom : Enemy, IEnemyAttack
     public void EnemyAttack()
     {
         // End of Animation, explode mushroom and destroy object
+        CanMove = false;
         GetAnimator().SetTrigger("Explosion");
         // Destroy(gameObject);
     }
 
     public void EnableExplosionRadius()
     {
-        CanMove = false;
         _explosionGameObject.SetActive(true);
         print("Mushroom: " + CanMove);
     }

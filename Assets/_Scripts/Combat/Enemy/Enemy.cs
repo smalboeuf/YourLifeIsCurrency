@@ -91,7 +91,7 @@ public class Enemy : Unit, IEnemy, IDie
 
             Vector3 targetPosition = _pathVectorList[_currentPathIndex];
 
-            if (Vector2.Distance(transform.position, targetPosition) > 0.5f && CanMove)
+            if (Vector2.Distance(transform.position, targetPosition) > 0.5f)
             {
                 Vector3 moveDir = (targetPosition - transform.position).normalized;
                 transform.position = transform.position + moveDir * _speed * Time.deltaTime;
@@ -105,11 +105,16 @@ public class Enemy : Unit, IEnemy, IDie
                 }
             }
         }
+        else
+        {
+            print("not moving");
+            StopMoving();
+            transform.position = transform.position;
+        }
     }
 
     public void Die()
     {
-        print("died called");
         Globals.EnemySpawner.EnemyDies();
         Destroy(gameObject);
     }
