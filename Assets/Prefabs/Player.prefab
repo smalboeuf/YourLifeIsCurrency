@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 3525264808608393747}
   - component: {fileID: 3525264808608393740}
   - component: {fileID: 3525264808608393741}
+  - component: {fileID: 1911266408894829791}
   - component: {fileID: 3525264808608393750}
   - component: {fileID: 3525264808608393749}
   m_Layer: 0
@@ -210,12 +211,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8124da8de2af2df49a081935e6108c6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb2d: {fileID: 0}
+  Rb2d: {fileID: 0}
   _defaultSpriteMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000,
     type: 0}
   _flashSpriteMaterial: {fileID: 2100000, guid: adb7d835355bb104c8d992c089130de8,
     type: 2}
   _onHitFlashLength: 0.2
+  CanMove: 1
   ShootHealthCost: 3
   ShootEnemyHealAmount: 3
   BasicAttackDamage: 3
@@ -249,6 +251,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 100
   CurrentHealth: 0
+--- !u!114 &1911266408894829791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3525264808608393742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d58a8c8ddeef87b44b819400d8ef5f28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3525264808608393750
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44b4f14ff3980c140bc6c71c8bc7a6bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 0
+  _damage: 5
 --- !u!1001 &3465826879976158316
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -229,5 +229,5 @@ MonoBehaviour:
   SpawnCost: 12
   _target: {fileID: 0}
   _speed: 4
-  _attackRange: 1.5
+  _attackRange: 2
   _explosionGameObject: {fileID: 4316189541467029200}

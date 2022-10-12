@@ -16,6 +16,10 @@ public class PlayerController : Unit, IDie
     private Health _health;
     [SerializeField] private PlayerHealthBarUI _playerHealthBarUi;
 
+    // Shield
+    private Shield _shield;
+
+
     [SerializeField] Shop _shop;
     public ShopItem InRangeShopItem;
 
@@ -27,6 +31,7 @@ public class PlayerController : Unit, IDie
         _playerInputs = GetComponent<PlayerInputs>();
         _projectileShooter = GetComponent<ProjectileShooter>();
         _health = GetComponent<Health>();
+        _shield = GetComponent<Shield>();
     }
 
     // Update is called once per frame
@@ -60,18 +65,6 @@ public class PlayerController : Unit, IDie
         TakeDamage(ShootHealthCost);
     }
 
-    public void OnHitEnemy()
-    {
-        _health.Heal(ShootEnemyHealAmount);
-        _playerHealthBarUi.UpdateUI();
-    }
-
-    public void TakeDamage(int damage)
-    {
-        _health.TakeDamage(ShootHealthCost);
-        _playerHealthBarUi.UpdateUI();
-    }
-
     public void OnInteract()
     {
         if (InRangeShopItem != null)
@@ -89,10 +82,51 @@ public class PlayerController : Unit, IDie
         print("Player Died");
     }
 
+    public int GetMaxHealth()
+    {
+        return _health.MaxHealth;
+    }
+
     public void IncreaseMaxHealth(int amount)
     {
         _health.IncreaseMaxHealth(amount);
         _playerHealthBarUi.UpdateUI();
+    }
+
+    public void OnHitEnemy()
+    {
+        _health.Heal(ShootEnemyHealAmount);
+        _playerHealthBarUi.UpdateUI();
+    }
+
+    public void TakeDamage(int damage)
+    {
+        int currentShieldPoints = _shield.GetCurrentShieldPoints();
+
+        if (currentShieldPoints - damage >= 0)
+        {
+            _shield.LoseShield(damage);
+        }
+        else
+        {
+            int remainder = damage - currentShieldPoints;
+            _shield.RemoveShield();
+            _health.TakeDamage(remainder);
+        }
+
+        _playerHealthBarUi.UpdateUI();
+    }
+
+    public void Heal(int damage)
+    {
+        _health.Heal(damage);
+        _playerHealthBarUi.UpdateUI();
+    }
+
+    public void AddShield(int amount)
+    {
+        // TODO Implement shield 
+        // Can make the shield UI go over the red globe similar to Path of Exile
     }
 
     public void UpdateTimeBetweenProjectiles(float amount)
