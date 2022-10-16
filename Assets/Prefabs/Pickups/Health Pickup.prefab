@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7038133761454392753}
   - component: {fileID: 7038133761454392752}
   - component: {fileID: 7038133761454392755}
-  - component: {fileID: 7038133761454392754}
+  - component: {fileID: 30927292923410457}
   m_Layer: 0
   m_Name: Health Pickup
   m_TagString: Untagged
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6fc6a4d106388b43bf06b24f2382c7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7038133761454392754
+--- !u!114 &30927292923410457
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,7 +146,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7038133761454392765}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f510b32f5298c549b882a44f830bee2, type: 3}
+  m_Script: {fileID: 11500000, guid: abe5ddaf6708d904e9cc0529720038a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AddsBuff: 0
+  TotalTime: 8
   _percentageOfHealthToHealth: 0.1

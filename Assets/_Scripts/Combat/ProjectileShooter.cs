@@ -77,11 +77,6 @@ public class ProjectileShooter : MonoBehaviour
         }
     }
 
-    public void SetShootAction(ShootActionDelegate shootActionDelegate)
-    {
-        ShootAction = shootActionDelegate;
-    }
-
     public void ResetProjectileShooterStats()
     {
         TimeBetweenProjectiles = _baseTimeBetweenProjectiles;

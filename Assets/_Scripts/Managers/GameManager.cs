@@ -4,7 +4,25 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] List<GameObject> _pickupPrefabs;
+    [SerializeField] float _pickupDropPercentage = 0.10f;
+
     [SerializeField] EnemySpawner _enemySpawner;
+
+    public GameObject RandomPickupDrop()
+    {
+        if (Random.value <= _pickupDropPercentage)
+        {
+            int randomPickupPrefabId = Random.Range(0, _pickupPrefabs.Count);
+            GameObject randomPickupPrefab = _pickupPrefabs[randomPickupPrefabId];
+
+            return randomPickupPrefab;
+        }
+        else
+        {
+            return null;
+        }
+    }
 
     public void GameOver()
     {

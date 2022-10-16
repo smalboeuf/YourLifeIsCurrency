@@ -56,9 +56,7 @@ public class ShopKeeper : MonoBehaviour
     {
         if (!IsAtDestination && _destination != null)
         {
-            print(_destination);
             transform.position = Vector2.MoveTowards(transform.position, _destination.position, _speed * Time.deltaTime);
-
             if (Vector2.Distance(transform.position, _destination.position) <= _destinationBuffer)
             {
                 IsAtDestination = true;

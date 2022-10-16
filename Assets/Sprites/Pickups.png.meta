@@ -190,6 +190,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Pickups_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eded7ecf871f5bc44838665495b891d1
+      internalID: -1305841565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pickups_4
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af529d3b2b77ffa45b7206a841eb5aba
+      internalID: 1334777509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -203,6 +245,8 @@ TextureImporter:
     nameFileIdTable:
       Pickups_2: 218482017
       Pickups_1: -1177662223
+      Pickups_3: -1305841565
+      Pickups_4: 1334777509
       Pickups_0: -685037609
   spritePackingTag: 
   pSDRemoveMatte: 0

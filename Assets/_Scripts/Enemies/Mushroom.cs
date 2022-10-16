@@ -17,11 +17,11 @@ public class Mushroom : Enemy, IEnemyAttack
     public void EnableExplosionRadius()
     {
         _explosionGameObject.SetActive(true);
-        print("Mushroom: " + CanMove);
     }
 
     public void DisableAfterExplosion()
     {
+        Die();
         Destroy(gameObject);
     }
 }

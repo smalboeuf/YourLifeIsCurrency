@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -15,6 +16,8 @@ public class Unit : MonoBehaviour
     private bool _isFlashing = false;
 
     public bool CanMove = true;
+
+    public List<EnabledStatusEffectTracker> EnabledStatusEffects;
 
     protected virtual void Start()
     {
@@ -32,6 +35,29 @@ public class Unit : MonoBehaviour
         else if (_isFlashing)
         {
             _flashTimer -= Time.deltaTime;
+        }
+
+        // Buff timers
+        if (EnabledStatusEffects.Count > 0)
+        {
+            for (int i = 0; i < EnabledStatusEffects.Count; i++)
+            {
+                EnabledStatusEffects[i].EffectTimer();
+                if (!EnabledStatusEffects[i].Active)
+                {
+                    EnabledStatusEffects[i].OnFinishEffect.Invoke();
+                    EnabledStatusEffects.Remove(EnabledStatusEffects[i]);
+                }
+            }
+            // foreach (EnabledStatusEffectTracker enabledStatusEffectTracker in EnabledStatusEffects.ToList())
+            // {
+            //     enabledStatusEffectTracker.EffectTimer();
+            //     if (!enabledStatusEffectTracker.Active)
+            //     {
+            //         enabledStatusEffectTracker.OnFinishEffect.Invoke();
+            //         EnabledStatusEffects.Remove(enabledStatusEffectTracker);
+            //     }
+            // }
         }
     }
 

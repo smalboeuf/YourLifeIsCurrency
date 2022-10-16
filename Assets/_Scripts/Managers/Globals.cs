@@ -5,6 +5,8 @@ using UnityEngine;
 public class Globals : MonoBehaviour
 {
     // Singleton
+    [SerializeField] private GameManager _gameManager;
+    public static GameManager GameManager;
 
     [SerializeField] private PlayerController _playerController;
     public static PlayerController PlayerController;
@@ -17,6 +19,7 @@ public class Globals : MonoBehaviour
 
     private void Awake()
     {
+        GameManager = _gameManager;
         PlayerController = _playerController;
         EnemySpawner = _enemySpawner;
         Shop = _shop;

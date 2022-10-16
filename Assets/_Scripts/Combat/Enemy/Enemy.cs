@@ -116,6 +116,13 @@ public class Enemy : Unit, IEnemy, IDie
     public void Die()
     {
         Globals.EnemySpawner.EnemyDies();
+        // Handle Random chance of pickup dropping
+        GameObject pickup = Globals.GameManager.RandomPickupDrop();
+        if (pickup != null)
+        {
+            Instantiate(pickup, gameObject.transform.position, Quaternion.identity);
+        }
+
         Destroy(gameObject);
     }
 

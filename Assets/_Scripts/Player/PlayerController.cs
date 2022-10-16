@@ -19,7 +19,6 @@ public class PlayerController : Unit, IDie
     // Shield
     private Shield _shield;
 
-
     [SerializeField] Shop _shop;
     public ShopItem InRangeShopItem;
 
