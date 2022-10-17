@@ -32,4 +32,9 @@ public class Health : MonoBehaviour
         MaxHealth += amount;
         CurrentHealth += amount;
     }
+
+    public float GetHealthPercentage()
+    {
+        return ((float)CurrentHealth / (float)MaxHealth);
+    }
 }

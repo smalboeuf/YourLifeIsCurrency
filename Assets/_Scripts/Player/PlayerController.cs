@@ -18,6 +18,7 @@ public class PlayerController : Unit, IDie
 
     // Shield
     private Shield _shield;
+    [SerializeField] private PlayerShieldBarUI _playerShieldBarUi;
 
     [SerializeField] Shop _shop;
     public ShopItem InRangeShopItem;
@@ -113,6 +114,7 @@ public class PlayerController : Unit, IDie
             _health.TakeDamage(remainder);
         }
 
+        _playerShieldBarUi.UpdateUI();
         _playerHealthBarUi.UpdateUI();
     }
 
@@ -124,8 +126,8 @@ public class PlayerController : Unit, IDie
 
     public void AddShield(int amount)
     {
-        // TODO Implement shield 
-        // Can make the shield UI go over the red globe similar to Path of Exile
+        _shield.AddShield(amount);
+        _playerShieldBarUi.UpdateUI();
     }
 
     public void UpdateTimeBetweenProjectiles(float amount)

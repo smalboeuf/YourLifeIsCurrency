@@ -6,6 +6,12 @@ public class Shield : MonoBehaviour
 {
     // The shield value maxes out at the players total HP
     private int _currentShieldPoints = 0;
+    private Health _playerHealth;
+
+    private void Start()
+    {
+        _playerHealth = GetComponent<Health>();
+    }
 
     public int GetCurrentShieldPoints()
     {
@@ -14,16 +20,35 @@ public class Shield : MonoBehaviour
 
     public void AddShield(int amount)
     {
-        _currentShieldPoints += amount;
+        if (_currentShieldPoints + amount > _playerHealth.MaxHealth)
+        {
+            _currentShieldPoints = _playerHealth.MaxHealth;
+        }
+        else
+        {
+            _currentShieldPoints += amount;
+        }
     }
 
     public void LoseShield(int amount)
     {
-        _currentShieldPoints -= amount;
+        if (_currentShieldPoints - amount < 0)
+        {
+            _currentShieldPoints = 0;
+        }
+        else
+        {
+            _currentShieldPoints -= amount;
+        }
     }
 
     public void RemoveShield()
     {
         _currentShieldPoints = 0;
+    }
+
+    public float GetShieldPercentage()
+    {
+        return ((float)_currentShieldPoints / (float)_playerHealth.MaxHealth);
     }
 }
