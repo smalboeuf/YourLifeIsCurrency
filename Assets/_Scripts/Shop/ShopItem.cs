@@ -5,16 +5,12 @@ using UnityEngine;
 public class ShopItem : MonoBehaviour
 {
     public GameObject ItemPrefab;
-    private Health _playerInRangeHealth;
     [SerializeField] public int HealthCost = 10;
     [SerializeField] public string Description;
 
     public void Purchase()
     {
-        if (_playerInRangeHealth != null)
-        {
-            _playerInRangeHealth.TakeDamage(HealthCost);
-        }
+        Globals.PlayerController.PayHealth(HealthCost);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

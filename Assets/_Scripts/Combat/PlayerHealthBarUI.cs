@@ -13,6 +13,7 @@ public class PlayerHealthBarUI : MonoBehaviour
     {
         _image = GetComponent<Image>();
         UpdateUI();
+        Globals.PlayerController.InitializeShield();
     }
 
     public void UpdateUI()

@@ -10,6 +10,7 @@ public class IncreaseBasicDamageItem : ShopItem, IShopItem
     public void OnPurchase()
     {
         // Increases damage but also cost of each bullet
+        Purchase();
         Globals.PlayerController.IncreaseBaseDamage(_damageAddition, _healthCostAddition);
     }
 }

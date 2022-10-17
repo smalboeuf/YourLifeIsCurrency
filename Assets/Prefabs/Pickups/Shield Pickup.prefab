@@ -95,4 +95,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AddsBuff: 0
   TotalTime: 8
-  _shieldValue: 10
+  _shieldValue: 20

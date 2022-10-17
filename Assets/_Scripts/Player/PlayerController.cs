@@ -62,7 +62,7 @@ public class PlayerController : Unit, IDie
 
     public void OnShoot()
     {
-        TakeDamage(ShootHealthCost);
+        PayHealth(ShootHealthCost);
     }
 
     public void OnInteract()
@@ -99,6 +99,12 @@ public class PlayerController : Unit, IDie
         _playerHealthBarUi.UpdateUI();
     }
 
+    public void PayHealth(int amount)
+    {
+        _health.TakeDamage(amount);
+        _playerHealthBarUi.UpdateUI();
+    }
+
     public void TakeDamage(int damage)
     {
         int currentShieldPoints = _shield.GetCurrentShieldPoints();
@@ -122,6 +128,11 @@ public class PlayerController : Unit, IDie
     {
         _health.Heal(damage);
         _playerHealthBarUi.UpdateUI();
+    }
+
+    public void InitializeShield()
+    {
+        _playerShieldBarUi.UpdateUI();
     }
 
     public void AddShield(int amount)
