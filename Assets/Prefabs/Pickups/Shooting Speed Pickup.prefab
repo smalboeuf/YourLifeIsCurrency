@@ -93,6 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bedc9139aca5464eb93c12d16c489d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: Shooting Speed
   AddsBuff: 1
   TotalTime: 8
-  _shootingSpeedChange: -0.2
+  _shootingSpeedChange: -0.1

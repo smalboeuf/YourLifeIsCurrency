@@ -93,6 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a46386b91ad8c5c4286c6a358a4cc8d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: Shield
   AddsBuff: 0
   TotalTime: 8
   _shieldValue: 20

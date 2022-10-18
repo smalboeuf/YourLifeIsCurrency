@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StatusEffect : MonoBehaviour
 {
+    public string Name;
     public bool AddsBuff = false;
     public float TotalTime = 8;
 }

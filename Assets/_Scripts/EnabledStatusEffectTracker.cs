@@ -7,6 +7,7 @@ public class EnabledStatusEffectTracker : MonoBehaviour
     public delegate void OnFinishEffectDelegate();
     public OnFinishEffectDelegate OnFinishEffect = delegate { };
 
+    public string Name;
     public bool Active = false;
     private float _totalTime = 0;
     private float _timeRemaining = 0;
@@ -17,6 +18,7 @@ public class EnabledStatusEffectTracker : MonoBehaviour
         OnFinishEffect += iStatusEffect.OnFinishEffect;
         _totalTime = statusEffect.TotalTime;
         _timeRemaining = _totalTime;
+        Name = statusEffect.Name;
         Active = true;
     }
 

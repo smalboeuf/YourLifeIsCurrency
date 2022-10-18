@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abe5ddaf6708d904e9cc0529720038a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: Health Potion
   AddsBuff: 0
   TotalTime: 8
   _percentageOfHealthToHealth: 0.1

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Pickup : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class Pickup : MonoBehaviour
             statusEffect.OnActivateEffect();
             if (_statusEffect.AddsBuff)
             {
+                Globals.PlayerController.AddStatusEffectUI(new EnabledStatusEffectTracker(_statusEffect), GetComponent<SpriteRenderer>().sprite);
                 Globals.PlayerController.EnabledStatusEffects.Add(new EnabledStatusEffectTracker(_statusEffect));
             }
 

@@ -20,6 +20,8 @@ public class PlayerController : Unit, IDie
     private Shield _shield;
     [SerializeField] private PlayerShieldBarUI _playerShieldBarUi;
 
+    [SerializeField] private StatusEffectDashboardUI _statusEffectDashboardUi;
+
     [SerializeField] Shop _shop;
     public ShopItem InRangeShopItem;
 
@@ -47,6 +49,17 @@ public class PlayerController : Unit, IDie
         {
             _playerMovement.MoveCharacter(_playerInputs.Inputs);
         }
+    }
+
+    public void AddStatusEffectUI(EnabledStatusEffectTracker enabledStatusEffectTracker, Sprite sprite)
+    {
+        EnabledStatusEffects.Add(enabledStatusEffectTracker);
+        _statusEffectDashboardUi.AddStatusEffect(sprite, enabledStatusEffectTracker.Name);
+    }
+
+    public void RemoveStatusEffectUI(string statusEffectName)
+    {
+        _statusEffectDashboardUi.RemoveStatusEffect(statusEffectName);
     }
 
     private void Shooting()

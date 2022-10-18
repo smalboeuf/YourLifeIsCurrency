@@ -46,18 +46,11 @@ public class Unit : MonoBehaviour
                 if (!EnabledStatusEffects[i].Active)
                 {
                     EnabledStatusEffects[i].OnFinishEffect.Invoke();
+                    Globals.PlayerController.RemoveStatusEffectUI(EnabledStatusEffects[i].Name);
                     EnabledStatusEffects.Remove(EnabledStatusEffects[i]);
+                    i--;
                 }
             }
-            // foreach (EnabledStatusEffectTracker enabledStatusEffectTracker in EnabledStatusEffects.ToList())
-            // {
-            //     enabledStatusEffectTracker.EffectTimer();
-            //     if (!enabledStatusEffectTracker.Active)
-            //     {
-            //         enabledStatusEffectTracker.OnFinishEffect.Invoke();
-            //         EnabledStatusEffects.Remove(enabledStatusEffectTracker);
-            //     }
-            // }
         }
     }
 
