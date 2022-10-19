@@ -17,8 +17,6 @@ public class Unit : MonoBehaviour
 
     public bool CanMove = true;
 
-    public List<EnabledStatusEffectTracker> EnabledStatusEffects;
-
     protected virtual void Start()
     {
         Rb2d = GetComponent<Rigidbody2D>();
@@ -35,22 +33,6 @@ public class Unit : MonoBehaviour
         else if (_isFlashing)
         {
             _flashTimer -= Time.deltaTime;
-        }
-
-        // Buff timers
-        if (EnabledStatusEffects.Count > 0)
-        {
-            for (int i = 0; i < EnabledStatusEffects.Count; i++)
-            {
-                EnabledStatusEffects[i].EffectTimer();
-                if (!EnabledStatusEffects[i].Active)
-                {
-                    EnabledStatusEffects[i].OnFinishEffect.Invoke();
-                    Globals.PlayerController.RemoveStatusEffectUI(EnabledStatusEffects[i].Name);
-                    EnabledStatusEffects.Remove(EnabledStatusEffects[i]);
-                    i--;
-                }
-            }
         }
     }
 

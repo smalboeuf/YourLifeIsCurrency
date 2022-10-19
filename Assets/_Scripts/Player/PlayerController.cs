@@ -20,6 +20,7 @@ public class PlayerController : Unit, IDie
     private Shield _shield;
     [SerializeField] private PlayerShieldBarUI _playerShieldBarUi;
 
+    public List<EnabledStatusEffectTracker> EnabledStatusEffects = new List<EnabledStatusEffectTracker>();
     [SerializeField] private StatusEffectDashboardUI _statusEffectDashboardUi;
 
     [SerializeField] Shop _shop;
@@ -41,6 +42,28 @@ public class PlayerController : Unit, IDie
     {
         base.Update();
         Shooting();
+
+        // Buff timers
+        if (EnabledStatusEffects.Count > 0)
+        {
+            for (int i = 0; i < EnabledStatusEffects.Count; i++)
+            {
+                EnabledStatusEffects[i].EffectTimer();
+                if (!EnabledStatusEffects[i].IsBlinking && EnabledStatusEffects[i].GetTimeRemaining() <= 3)
+                {
+                    EnabledStatusEffects[i].IsBlinking = true;
+                    StartCoroutine(_statusEffectDashboardUi.BlinkGameObject(EnabledStatusEffects[i].Name, 6, 0.25f));
+                }
+
+                if (!EnabledStatusEffects[i].Active)
+                {
+                    EnabledStatusEffects[i].OnFinishEffect.Invoke();
+                    Globals.PlayerController.RemoveStatusEffectUI(EnabledStatusEffects[i].Name);
+                    EnabledStatusEffects.Remove(EnabledStatusEffects[i]);
+                    i--;
+                }
+            }
+        }
     }
 
     private void FixedUpdate()

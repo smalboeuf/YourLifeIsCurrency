@@ -21,7 +21,6 @@ public class Pickup : MonoBehaviour
             if (_statusEffect.AddsBuff)
             {
                 Globals.PlayerController.AddStatusEffectUI(new EnabledStatusEffectTracker(_statusEffect), GetComponent<SpriteRenderer>().sprite);
-                Globals.PlayerController.EnabledStatusEffects.Add(new EnabledStatusEffectTracker(_statusEffect));
             }
 
             Destroy(gameObject);

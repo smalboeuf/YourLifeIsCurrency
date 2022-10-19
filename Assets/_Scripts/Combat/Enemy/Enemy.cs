@@ -66,14 +66,11 @@ public class Enemy : Unit, IEnemy, IDie
 
     private void SetTargetPosition()
     {
-        if (_target == null)
-            print(_target);
-
         // Pathfinding
-        _currentPathIndex = 0;
         if (_target == null)
             return;
 
+        _currentPathIndex = 0;
         _pathVectorList = Pathfinding.Instance.FindPath(transform.position, _target.transform.position);
 
         if (_pathVectorList != null && _pathVectorList.Count > 0)
@@ -107,7 +104,6 @@ public class Enemy : Unit, IEnemy, IDie
         }
         else
         {
-            print("not moving");
             StopMoving();
             transform.position = transform.position;
         }

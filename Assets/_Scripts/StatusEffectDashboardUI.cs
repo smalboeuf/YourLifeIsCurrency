@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,5 +30,20 @@ public class StatusEffectDashboardUI : MonoBehaviour
                 break;
             }
         }
+    }
+
+    public IEnumerator BlinkGameObject(string statusEffectName, int numBlinks, float seconds)
+    {
+        GameObject effectObj = _activeStatusEffectUIGameobjects.First(a => a.name == statusEffectName);
+        Image image = effectObj.GetComponent<Image>();
+        for (int i = 0; i < numBlinks * 2; i++)
+        {
+            //toggle renderer
+            image.enabled = !image.enabled;
+            //wait for a bit
+            yield return new WaitForSeconds(seconds);
+        }
+        //make sure renderer is enabled when we exit
+        // renderer.enabled = true;
     }
 }

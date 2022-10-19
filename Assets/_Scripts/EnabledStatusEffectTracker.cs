@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnabledStatusEffectTracker : MonoBehaviour
+public class EnabledStatusEffectTracker
 {
     public delegate void OnFinishEffectDelegate();
     public OnFinishEffectDelegate OnFinishEffect = delegate { };
@@ -11,6 +11,7 @@ public class EnabledStatusEffectTracker : MonoBehaviour
     public bool Active = false;
     private float _totalTime = 0;
     private float _timeRemaining = 0;
+    public bool IsBlinking = false;
 
     public EnabledStatusEffectTracker(StatusEffect statusEffect)
     {
@@ -32,5 +33,10 @@ public class EnabledStatusEffectTracker : MonoBehaviour
         {
             Active = false;
         }
+    }
+
+    public float GetTimeRemaining()
+    {
+        return _timeRemaining;
     }
 }
