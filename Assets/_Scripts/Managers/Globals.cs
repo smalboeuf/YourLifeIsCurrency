@@ -17,11 +17,15 @@ public class Globals : MonoBehaviour
     [SerializeField] private Shop _shop;
     public static Shop Shop;
 
+    [SerializeField] private GameObject _healthGlobeParent;
+    public static GameObject HealthGlobeParent;
+
     private void Awake()
     {
         GameManager = _gameManager;
         PlayerController = _playerController;
         EnemySpawner = _enemySpawner;
         Shop = _shop;
+        HealthGlobeParent = _healthGlobeParent;
     }
 }

@@ -2,10 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HideHealthBarDebuff : Debuff, IDebuff
+public class HideHealthBarDebuff : StatusEffect, IStatusEffect
 {
-    public void OnApply()
+    public void OnActivateEffect()
     {
-        // TODO: Hide Health Bar while debuff is active
+        Globals.GameManager.HidePlayerHealthUI();
+    }
+
+    public void OnFinishEffect()
+    {
+        Globals.GameManager.ShowPlayerHealthUI();
     }
 }

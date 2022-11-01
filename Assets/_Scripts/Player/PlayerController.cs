@@ -156,8 +156,15 @@ public class PlayerController : Unit, IDie
             _health.TakeDamage(remainder);
         }
 
-        _playerShieldBarUi.UpdateUI();
-        _playerHealthBarUi.UpdateUI();
+        if (_playerShieldBarUi != null)
+        {
+            _playerShieldBarUi.UpdateUI();
+        }
+
+        if (_playerHealthBarUi != null)
+        {
+            _playerHealthBarUi.UpdateUI();
+        }
     }
 
     public void Heal(int damage)

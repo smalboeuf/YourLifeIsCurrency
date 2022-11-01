@@ -25,6 +25,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void HidePlayerHealthUI()
+    {
+        Globals.HealthGlobeParent.SetActive(false);
+    }
+
+    public void ShowPlayerHealthUI()
+    {
+        Globals.HealthGlobeParent.SetActive(true);
+    }
+
     public void Play()
     {
         SceneManager.LoadScene(2);
