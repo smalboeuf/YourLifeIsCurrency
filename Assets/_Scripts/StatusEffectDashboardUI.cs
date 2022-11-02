@@ -13,7 +13,15 @@ public class StatusEffectDashboardUI : MonoBehaviour
     public void AddStatusEffect(Sprite sprite, string statusEffectName)
     {
         GameObject statusEffectGameobject = _statusEffectUIPrefab;
-        statusEffectGameobject.GetComponent<Image>().sprite = sprite;
+        Image image = statusEffectGameobject.GetComponent<Image>();
+        image.sprite = sprite;
+        if (sprite == null)
+        {
+            Color newColor = image.color;
+            newColor.a = 0f;
+            image.color = newColor;
+        }
+
         GameObject createdStatusEffect = Instantiate(statusEffectGameobject, statusEffectGameobject.transform.position, Quaternion.identity, gameObject.transform);
         createdStatusEffect.name = statusEffectName;
         _activeStatusEffectUIGameobjects.Add(createdStatusEffect);
@@ -36,12 +44,15 @@ public class StatusEffectDashboardUI : MonoBehaviour
     {
         GameObject effectObj = _activeStatusEffectUIGameobjects.First(a => a.name == statusEffectName);
         Image image = effectObj.GetComponent<Image>();
-        for (int i = 0; i < numBlinks * 2; i++)
+        if (image != null)
         {
-            //toggle renderer
-            image.enabled = !image.enabled;
-            //wait for a bit
-            yield return new WaitForSeconds(seconds);
+            for (int i = 0; i < numBlinks * 2; i++)
+            {
+                //toggle renderer
+                image.enabled = !image.enabled;
+                //wait for a bit
+                yield return new WaitForSeconds(seconds);
+            }
         }
         //make sure renderer is enabled when we exit
         // renderer.enabled = true;

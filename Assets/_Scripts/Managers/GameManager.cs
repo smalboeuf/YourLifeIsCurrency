@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,9 +15,7 @@ public class GameManager : MonoBehaviour
     {
         if (Random.value <= _pickupDropPercentage)
         {
-            int randomPickupPrefabId = Random.Range(0, _pickupPrefabs.Count);
-            GameObject randomPickupPrefab = _pickupPrefabs[randomPickupPrefabId];
-
+            GameObject randomPickupPrefab = Helpers.GetRandomListEntry(_pickupPrefabs);
             return randomPickupPrefab;
         }
         else
@@ -27,12 +26,28 @@ public class GameManager : MonoBehaviour
 
     public void HidePlayerHealthUI()
     {
-        Globals.HealthGlobeParent.SetActive(false);
+        print("Hide health");
+        Image[] children = Globals.HealthGlobeParent.GetComponentsInChildren<Image>();
+        Color newColor;
+        foreach (Image child in children)
+        {
+            newColor = child.color;
+            newColor.a = 0f;
+            child.color = newColor;
+        }
     }
 
     public void ShowPlayerHealthUI()
     {
-        Globals.HealthGlobeParent.SetActive(true);
+        print("Show health");
+        Image[] children = Globals.HealthGlobeParent.GetComponentsInChildren<Image>();
+        Color newColor;
+        for (int i = 1; i < children.Length; i++)
+        {
+            newColor = children[i].color;
+            newColor.a = 1f;
+            children[i].color = newColor;
+        }
     }
 
     public void Play()

@@ -6,7 +6,7 @@ public class Boss : MonoBehaviour
 {
     public Health Health;
 
-    private void Start()
+    public void Start()
     {
         Health = GetComponent<Health>();
     }
